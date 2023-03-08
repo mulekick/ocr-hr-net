@@ -1,4 +1,40 @@
 const
+    sample = [
+        // sample data
+        {
+            firstName: `Yves`,
+            lastName: `Jacquier`,
+            birthDate: new Date(`2001-06-11T22:00:00.000Z`),
+            startDate: new Date(`2023-03-01T23:00:00.000Z`),
+            street: `15 Rue de la Faisanderie`,
+            city: `Paris`,
+            state: {label: `Arizona`, value: `AZ`},
+            zipCode: `75000`,
+            department: {label: `Marketing`, value: `humanresources`}
+        },
+        {
+            firstName: `Hubert`,
+            lastName: `Estier`,
+            birthDate: new Date(`1996-12-11T22:00:00.000Z`),
+            startDate: new Date(`2023-02-01T23:00:00.000Z`),
+            street: `15 Allée de la Justice`,
+            city: `Versailles`,
+            state: {label: `American Samoa`, value: `AS`},
+            zipCode: `78000`,
+            department: {label: `Human Resources`, value: `marketing`}
+        },
+        {
+            firstName: `Marianne`,
+            lastName: `Vasseur`,
+            birthDate: new Date(`1988-12-11T22:00:00.000Z`),
+            startDate: new Date(`2021-02-01T23:00:00.000Z`),
+            street: `15 Rue Grande`,
+            city: `Melun`,
+            state: {label: `Alabama`, value: `AL`},
+            zipCode: `77000`,
+            department: {label: `Human Resources`, value: `marketing`}
+        }
+    ],
     departments = [
         {
             label: `Sales`,
@@ -260,4 +296,4 @@ const
         }
     ];
 
-export {departments, states};
+export {sample, departments, states};

@@ -1,4 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
+// sample data
+import {sample} from "../helpers/constants.js";
 
 const
     // create a slice to manage the employees list
@@ -8,7 +10,9 @@ const
         // initial state for the slice
         initialState: {
             // starting with an empty list ...
-            list: []
+            list: [
+                ...sample
+            ]
         },
         // reducers for the slice (create reducers and export action creator functions)
         reducers: {
