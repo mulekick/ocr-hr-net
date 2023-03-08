@@ -2,7 +2,7 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {createColumnHelper, flexRender, getCoreRowModel, getSortedRowModel, getFilteredRowModel, useReactTable} from "@tanstack/react-table";
+import {createColumnHelper, flexRender, getCoreRowModel, getSortedRowModel, getFilteredRowModel, getPaginationRowModel, useReactTable} from "@tanstack/react-table";
 import {selectEmployees} from "../app/employeesSlice.js";
 
 const
@@ -20,7 +20,8 @@ const
         }),
         columnHelper.accessor(`department`, {
             header: () => `Department`,
-            cell: c => c.getValue().label
+            cell: c => c.getValue().label,
+            sortingFn: `customSorting`
         }),
         columnHelper.accessor(`birthDate`, {
             header: () => `Date of Birth`,
@@ -34,12 +35,15 @@ const
         }),
         columnHelper.accessor(`state`, {
             header: () => `State`,
-            cell: c => c.getValue().label
+            cell: c => c.getValue().label,
+            sortingFn: `customSorting`
         }),
         columnHelper.accessor(`zipCode`, {
             header: () => `Zip Code`
         })
     ],
+    // create custom sorting function
+    customSorting = (rowA, rowB, columnId) => (rowA.getValue(columnId).label < rowB.getValue(columnId).label ? 1 : -1),
     // create global filtering function
     customFilter = (row, columnId, value, addMeta) => {
         const
@@ -90,16 +94,18 @@ const
                 data: list,
                 // columns definitions
                 columns,
-                // get models for rows display
+                // pipeline models for rows display
                 getCoreRowModel: getCoreRowModel(),
                 getSortedRowModel: getSortedRowModel(),
                 getFilteredRowModel: getFilteredRowModel(),
+                getPaginationRowModel: getPaginationRowModel(),
                 // pass sorting and filtering parameters from local component state
                 state: {sorting, globalFilter},
-                // sorting and filtering state update function
+                // sorting and filtering state update functions
                 onSortingChange: setSorting,
                 onGlobalFilterChange: setGlobalFilter,
-                // global filtering function
+                // sorting and global filtering functions
+                sortingFns: {customSorting},
                 globalFilterFn: customFilter,
                 // disable console debug messages
                 debugTable: false
@@ -154,7 +160,25 @@ const
                     }
                 </tbody>
             </table>
-            <Link to={ `/` }>Home</Link>
+
+            <p>
+                <button onClick={() => table.setPageIndex(0)} disabled={!table.getCanPreviousPage()}>{`<<`}</button>
+                <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()} >{`<`}</button>
+                <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>{`>`}</button>
+                <button onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}>{`>>`}</button>
+            </p>
+
+            <p>Page <strong>{table.getState().pagination.pageIndex + 1} of {table.getPageCount()}</strong></p>
+
+            <select value={table.getState().pagination.pageSize} onChange={e => table.setPageSize(Number(e.target.value))}>
+                {
+                    [ 10, 20, 30, 40, 50 ].map(pageSize => <option key={pageSize} value={pageSize}>Show {pageSize}</option>)
+                }
+            </select>
+
+            <p>
+                <Link to={ `/` }>Home</Link>
+            </p>
         </main>;
     };
 

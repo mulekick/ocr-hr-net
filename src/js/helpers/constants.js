@@ -1,40 +1,6 @@
+import {faker} from "@faker-js/faker";
+
 const
-    sample = [
-        // sample data
-        {
-            firstName: `Yves`,
-            lastName: `Jacquier`,
-            birthDate: new Date(`2001-06-11T22:00:00.000Z`),
-            startDate: new Date(`2023-03-01T23:00:00.000Z`),
-            street: `15 Rue de la Faisanderie`,
-            city: `Paris`,
-            state: {label: `Arizona`, value: `AZ`},
-            zipCode: `75000`,
-            department: {label: `Marketing`, value: `humanresources`}
-        },
-        {
-            firstName: `Hubert`,
-            lastName: `Estier`,
-            birthDate: new Date(`1996-12-11T22:00:00.000Z`),
-            startDate: new Date(`2023-02-01T23:00:00.000Z`),
-            street: `15 Allée de la Justice`,
-            city: `Versailles`,
-            state: {label: `American Samoa`, value: `AS`},
-            zipCode: `78000`,
-            department: {label: `Human Resources`, value: `marketing`}
-        },
-        {
-            firstName: `Marianne`,
-            lastName: `Vasseur`,
-            birthDate: new Date(`1988-12-11T22:00:00.000Z`),
-            startDate: new Date(`2021-02-01T23:00:00.000Z`),
-            street: `15 Rue Grande`,
-            city: `Melun`,
-            state: {label: `Alabama`, value: `AL`},
-            zipCode: `77000`,
-            department: {label: `Human Resources`, value: `marketing`}
-        }
-    ],
     departments = [
         {
             label: `Sales`,
@@ -294,6 +260,20 @@ const
             label: `Wyoming`,
             value: `WY`
         }
-    ];
+    ],
+    rnd = (lb, ub) => lb + Math.round(Math.random() * (ub - lb)),
+    randomEmployee = () => ({
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        birthDate: faker.date.birthdate(),
+        startDate: faker.date.past(),
+        street: faker.address.streetAddress(false),
+        city: faker.address.cityName(),
+        state: states[rnd(0, states.length - 1)],
+        zipCode: faker.address.zipCode(),
+        department: departments[rnd(0, departments.length - 1)]
+    }),
+    // sample data
+    sample = Array.from({length: 50}).map(x => randomEmployee());
 
-export {sample, departments, states};
+export {sample, departments, states, randomEmployee};
