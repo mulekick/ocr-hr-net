@@ -1,44 +1,153 @@
+@charset "utf-8";
+
+@import "mixins";
+
 // import datepicker styles
 @import "../../node_modules/react-datepicker/src/stylesheets/datepicker.scss";
 
-html {
-    font-family: sans-serif;
-    font-size: 14px;
-}  
+body {
+    width: 1240px;
+    // remove default margin
+    margin: 0 calc((100% - 1240px) / 2);
 
-.title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // enable vertical scrolling when footer overlays page contents ...
+    > #root > div:first-of-type {
+        margin-bottom: 100px;
+    }
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* ========== GENERAL STYLES ========== */
+
+header {
+    // content layout management
+    @include flex($direction: row, $align: center, $justify: center);
+    @include box($width: 100%);
+
+    h1 {
+        // content layout management
+        @include flex($direction: row, $align: center);
+        @include box();
+        > a {
+            // style overrides
+            font-size: $font_xlarge;
+            font-family: 'Fredoka One', cursive;
+            text-decoration: none;
+            color: unset;
+        }
+    }
 }
 
-label {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 10px;
+main {
+    // content layout management
+    @include flex($align: flex-start, $justify: flex-start);
+    @include box($width: 100%);
 }
 
-.address {
-    margin-top: 10px;
+footer {
+    @include flex();
+    @include box($width: 1210px, $height: 100px, $backcolor: #000000, $radius: unset);
+    @include span($margin: 0 15px, $color: $color_font_secondary);
+
+    // style overrides
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
 }
 
-table {
-    border: 1px solid lightgray;
+/* ======= PAGE SPECIFIC STYLES ======= */
+
+div.employees-list-pagination-search {
+
+    // content layout management
+    @include flex($direction: row, $align: center, $justify: space-between);
+    @include box($width: inherit, $padding: 2.5px);
+
+    // pagination selector
+    > span {
+        @include box($padding: unset);
+        @include span($margin: unset, $size: $font_small);
+
+        > input {
+            @include box($height: 38px, $padding: 7.5px, $backcolor: hsl(0, 0%, 100%), $radius: 5px);
+            @include span($margin: unset, $size: $font_small);
+            border: 1px solid hsl(0, 0%, 80%);
+        }
+    }
+
 }
 
-tbody {
-    border-bottom: 1px solid lightgray;
+ul.employees-list {
+
+    // content layout management
+    @include flex($align: center);
+    @include box($width: inherit, $padding: 0px);
+
+    // style overrides
+    list-style-type: none;
+
+    > li {
+
+        // content layout management
+        @include flex($direction: row, $align: center, $justify: space-around);
+        @include box($width: inherit, $padding: 0px);
+
+        // columns headers
+        > span {
+            @include flex($direction: row);
+            @include span($margin: 2.5px, $size: $font_small);
+            @include box($width: 11.11%, $radius: unset);
+        }
+
+        // column sizing ...
+        /*
+        > span:nth-child(6) { width: 12.5%; }
+        > span:nth-child(9) { width: 7.5%; }
+        */
+
+    }
+
+    // table headers
+    > li:first-child {
+
+        // columns headers
+        > span {
+
+            // style overrides
+            justify-content: space-between;
+            height: 50px;
+            padding: 7.5px;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+
+            // clickable header
+            > div:nth-child(1) {
+                cursor: pointer;
+            }
+
+        }
+
+    }
+
+    // table rows
+    > li:not(:first-child) {
+
+        // cells values
+        > span {
+
+            // style overrides            
+            justify-content: flex-start;
+            height: 25px;
+            padding: unset;
+            color: black;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+        }
+        
+    }
+
 }
 
-th {
-    border-bottom: 1px solid lightgray;
-    border-right: 1px solid lightgray;
-    padding: 2px 4px;
-}
+/* ==== COMPONENT SPECIFIC STYLES ===== */

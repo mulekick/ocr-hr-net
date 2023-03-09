@@ -273,7 +273,7 @@ const
         zipCode: faker.address.zipCode(),
         department: departments[rnd(0, departments.length - 1)]
     }),
-    // sample data
+    // sample employee data
     sample = Array.from({length: 50}).map(x => randomEmployee());
 
 export {sample, departments, states, randomEmployee};

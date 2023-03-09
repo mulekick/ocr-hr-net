@@ -1,5 +1,5 @@
 // import modules
-import {Outlet} from "react-router-dom";
+import {Outlet, Link} from "react-router-dom";
 
 const
     // init general app layout
@@ -11,13 +11,15 @@ const
         // return component
         return <>
             <header className="title">
-                <h1>HRnet</h1>
+                <h1><Link to={ `/` }>HRnet</Link></h1>
             </header>
             {
                 /* display the error in the general navigation context ... */
                 error ? <p>an error occured</p> : <Outlet />
             }
-            <footer>&nbsp;</footer>
+            <footer>
+                <span>Copyright HRnet 2023</span>
+            </footer>
         </>;
     };
 
