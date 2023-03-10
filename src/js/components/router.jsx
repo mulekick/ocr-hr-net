@@ -3,8 +3,8 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 // import components
 import Layout from "./layout.jsx";
-import CreateEmployeePage from "./createEmployee.jsx";
-import ListEmployeesPage from "./listEmployees.jsx";
+import PageNewEmployee from "./pageNewEmployee.jsx";
+import PageListEmployees from "./pageListEmployees.jsx";
 
 const
     // init router
@@ -19,11 +19,11 @@ const
             children: [ {
                 // default outlet for route / (new employee form)
                 index: true,
-                element: <CreateEmployeePage />
+                element: <PageNewEmployee />
             }, {
                 // default outlet for route /list (employees list page)
                 path: `list`,
-                element: <ListEmployeesPage />
+                element: <PageListEmployees />
             } ]
         }
     ]),

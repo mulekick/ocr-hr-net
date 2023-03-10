@@ -13,9 +13,14 @@ import Select from 'react-select';
 import {departments, states} from "../helpers/constants.js";
 import {add} from "../app/employeesSlice.js";
 
+// subcomponents
+import StyledInput from "./styledInput.jsx";
+import StyledSelect from "./styledSelect.jsx";
+import StyledDate from "./styledDate.jsx";
+
 const
     // init login page component
-    CreateEmployeePage = props => {
+    PageNewEmployee = props => {
         const
             // extract props
             {nul} = props,
@@ -62,9 +67,77 @@ const
             };
 
         // return component
-        return <main className="container">
+        return <main>
 
             <Link to={ `/list` }>View Current Employees</Link>
+
+            <h2>Create Employee</h2>
+
+            <form onSubmit={ createEmployee }>
+
+                <div>
+                    <div>
+                        <span className="basic-styled">First Name</span>
+                        <StyledInput type="text" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">Last Name</span>
+                        <StyledInput type="text" value={lastName} onChange={e => setLastName(e.target.value)} />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">Date of Birth</span>
+                        <StyledDate selected={birthDate} onChange={d => setBirthDate(d)} />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">Start Date</span>
+                        <StyledDate selected={startDate} onChange={d => setStartDate(d)} />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">Department</span>
+                        <StyledSelect defaultValue={department} options={departments} onChange={setDepartment} placeholder="Select department ..." />
+                    </div>
+
+                </div>
+
+                <fieldset className="address">
+
+                    <div>
+                        <span className="basic-styled">Street</span>
+                        <StyledInput type="text" value={street} onChange={e => setStreet(e.target.value)} />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">City</span>
+                        <StyledInput type="text" value={city} onChange={e => setCity(e.target.value)} />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">State</span>
+                        <StyledSelect defaultValue={state} options={states} onChange={setState} placeholder="Select state ..." />
+                    </div>
+
+                    <div>
+                        <span className="basic-styled">Zip Code</span>
+                        <StyledInput type="number" value={zipCode} onChange={e => setZipCode(e.target.value)} />
+                    </div>
+
+                    <button type="submit">Save</button>
+
+                </fieldset>
+
+            </form>
+
+        </main>;
+    };
+
+export default PageNewEmployee;
+
+/*
+
 
             <h2>Create Employee</h2>
 
@@ -106,8 +179,4 @@ const
                 <button type="submit">Save</button>
 
             </form>
-
-        </main>;
-    };
-
-export default CreateEmployeePage;
+*/

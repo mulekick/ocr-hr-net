@@ -9,7 +9,7 @@ const
             {error} = props;
 
         // return component
-        return <>
+        return <div>
             <header className="title">
                 <h1><Link to={ `/` }>HRnet</Link></h1>
             </header>
@@ -20,7 +20,7 @@ const
             <footer>
                 <span>Copyright HRnet 2023</span>
             </footer>
-        </>;
+        </div>;
     };
 
 export default Layout;
