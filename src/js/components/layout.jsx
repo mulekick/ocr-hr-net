@@ -12,6 +12,12 @@ const
         return <div>
             <header className="title">
                 <h1><Link to={ `/` }>HRnet</Link></h1>
+                <nav>
+                    <ul>
+                        <li><Link to={ `` }>Create Employee</Link></li>
+                        <li><Link to={ `/list` }>View Current Employees</Link></li>
+                    </ul>
+                </nav>
             </header>
             {
                 /* display the error in the general navigation context ... */

@@ -15,7 +15,8 @@
         "react-router-dom": "^6.8.2",
         "react-scripts": "5.0.1",
         "react-select": "^5.7.0",
-        "sass": "^1.58.3"
+        "sass": "^1.58.3",
+        "serve": "^14.2.0"
     },
     "devDependencies": {
         "@mulekick/eslint-config-muleslint": "^1.0.2"
@@ -46,6 +47,5 @@
     "author": "mulekick <moolekick@gmail.com> (https://github.com/mulekick)",
     "license": "MIT",
     "repository": {},
-    "bugs": {},
-    "homepage": "https://mulekick.github.io/ocr-hr-net/"
+    "bugs": {}
 }

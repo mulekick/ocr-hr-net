@@ -20,7 +20,7 @@ body {
 
 header {
     // content layout management
-    @include flex($direction: row, $align: center, $justify: center);
+    @include flex($align: center, $justify: center);
     @include box($width: 100%);
 
     h1 {
@@ -35,18 +35,43 @@ header {
             color: unset;
         }
     }
+
+    nav {
+        width: 100%;
+
+        ul {
+            // content layout management
+            @include flex($direction: row, $align: center, $justify: flex-start);
+            @include box($padding: unset);
+            // style overrides
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0px;
+            // ul elements
+            a {
+                @include box($width: inherit, $padding: 15px 30px 15px 0);
+                @include span();
+                // style overrides
+                text-decoration: none;
+                // pseudo styles
+                &:hover, &:active {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }
 
 main {
     // content layout management
     @include flex($align: flex-start, $justify: flex-start);
-    @include box($width: 100%);
+    @include box($width: 100%, $backcolor: whitesmoke);
 }
 
 footer {
     @include flex();
-    @include box($width: 1210px, $height: 100px, $backcolor: #000000, $radius: unset);
-    @include span($margin: 0 15px, $color: $color_font_secondary);
+    @include box($width: 1240px, $height: 100px, $backcolor: #000000, $radius: unset);
+    @include span($margin: 0px, $color: $color_font_secondary);
 
     // style overrides
     position: fixed;
@@ -56,16 +81,17 @@ footer {
 
 /* ======= PAGE SPECIFIC STYLES ======= */
 
+// employees list
+
 div.employees-list-header, div.employees-list-footer {
 
     // content layout management
     @include flex($direction: row, $align: center, $justify: space-between);
-    @include box($width: inherit, $padding: 2.5px);
+    @include box($width: inherit, $padding: 2.5px, $backcolor: inherit);
 
 }
 
 div.employees-list-footer {
-
     > span:nth-of-type(1) {
         // style overrides
         padding-left: 0px;
@@ -86,11 +112,9 @@ div.employees-list-footer {
             cursor: pointer;
         }
     }
-
 }
 
 ul.employees-list {
-
     // content layout management
     @include flex($align: center);
     @include box($width: inherit, $padding: 0px);
@@ -99,7 +123,6 @@ ul.employees-list {
     list-style-type: none;
 
     > li {
-
         // content layout management
         @include flex($direction: row, $align: center, $justify: space-around);
         @include box($width: inherit, $padding: 0px);
@@ -116,7 +139,6 @@ ul.employees-list {
         > span:nth-child(6) { width: 12.5%; }
         > span:nth-child(9) { width: 7.5%; }
         */
-
     }
 
     // table headers
@@ -124,7 +146,6 @@ ul.employees-list {
 
         // columns headers
         > span {
-
             // style overrides
             justify-content: space-between;
             height: 50px;
@@ -132,12 +153,10 @@ ul.employees-list {
             background-color: black;
             color: white;
             font-weight: bold;
-
             // clickable header
             > div:nth-child(1) {
                 cursor: pointer;
             }
-
         }
 
     }
@@ -147,7 +166,6 @@ ul.employees-list {
 
         // cells values
         > span {
-
             // style overrides            
             justify-content: flex-start;
             height: 25px;
@@ -156,26 +174,50 @@ ul.employees-list {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-
         }
-        
-    }
 
+    }
 }
+
+// new employee form
 
 form {
     @include flex($direction: row, $align: flex-start, $justify: space-between);
-    @include box($width: 100%, $height: 100%, $backcolor: yellow);
+    @include box($width: 100%, $height: 100%, $padding: unset, $backcolor: inherit);
 
-    > div, fieldset {
-
+    // form section
+    .form-fields {
         @include flex($align: flex-start);
-        @include box($width: calc(50% - 7.5px));
+        @include box($width: 100%);
 
+        // align fields and labels
         > div {
             @include flex($align: flex-start);
         }
+    }
 
+    > div:nth-of-type(1) {
+        // styles overrides
+        width: calc(50% - 7.5px);
+        border: 2px groove rgb(192, 192, 192);
+    }
+
+    > div:nth-of-type(2) {
+        // styles overrides
+        width: calc(50% - 7.5px);
+        padding: unset;
+    }
+
+    button {
+        @include box($width: 100%);
+        @include span($margin: 12.5px 2px 0px 2px);
+
+        // styles overrides
+        border: 2px groove rgb(192, 192, 192);
+        cursor: pointer;
+        &:hover {
+            background-color: gainsboro;
+        }
     }
 }
 
@@ -183,7 +225,7 @@ form {
 
 // styles for text-only spans
 span.basic-styled {
-    @include box($height: 38px, $padding: 7.5px);
+    @include box($height: 38px, $padding: 7.5px, $backcolor: inherit);
     @include span($margin: unset, $size: $font_small);
 }
 
