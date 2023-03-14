@@ -1,8 +1,5 @@
-/* eslint-disable no-shadow */
-
 // import modules
 import {useState} from "react";
-import {useNavigate, Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 
 // helpers and redux related
@@ -13,6 +10,7 @@ import {add} from "../app/employeesSlice.js";
 import StyledInput from "./styledInput.jsx";
 import StyledSelect from "./styledSelect.jsx";
 import StyledDate from "./styledDate.jsx";
+import StyledModal from "./styledModal.jsx";
 
 const
     // init login page component
@@ -22,8 +20,6 @@ const
             {nul} = props,
             // dispatch hook
             dispatch = useDispatch(),
-            // state persistence compliant navigation hook
-            // navigate = useNavigate(),
             // store form data in component local state
             [ firstName, setFirstName ] = useState(``),
             [ lastName, setLastName ] = useState(``),
@@ -34,6 +30,8 @@ const
             [ state, setState ] = useState(null),
             [ zipCode, setZipCode ] = useState(``),
             [ department, setDepartment ] = useState(null),
+            // store modal state in component local state
+            [ modalState, setModalState ] = useState(false),
             // form submission handler
             createEmployee = ev => {
                 ev.preventDefault();
@@ -58,12 +56,14 @@ const
                     // object
                     department
                 }));
-                // navigate to the account page ...
-                // navigate(`/account`);
+                // open confirmation modal
+                setModalState(true);
             };
 
         // return component
         return <main>
+            { /* state is lifted from the modal component to the local compnent ... */}
+            <StyledModal modalState={modalState} onModalStateChange={setModalState} />
             <form onSubmit={ createEmployee }>
                 {/* general fields */}
                 <div className="form-fields">
@@ -116,48 +116,3 @@ const
     };
 
 export default PageNewEmployee;
-
-/*
-
-
-            <h2>Create Employee</h2>
-
-            <form onSubmit={ createEmployee }>
-
-                <label htmlFor="first-name">First Name</label>
-                <input type="text" id="first-name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-
-                <label htmlFor="last-name">Last Name</label>
-                <input type="text" id="last-name" value={lastName} onChange={e => setLastName(e.target.value)} />
-
-                <label htmlFor="date-of-birth">Date of Birth</label>
-                <DatePicker selected={birthDate} onChange={d => setBirthDate(d)} />
-
-                <label htmlFor="start-date">Start Date</label>
-                <DatePicker selected={startDate} onChange={d => setStartDate(d)} />
-
-                <fieldset className="address">
-
-                    <legend>Address</legend>
-
-                    <label htmlFor="street">Street</label>
-                    <input type="text" id="street" value={ street } onChange={e => setStreet(e.target.value)} />
-
-                    <label htmlFor="city">City</label>
-                    <input type="text" id="city" value={ city } onChange={e => setCity(e.target.value)} />
-
-                    <label htmlFor="state">State</label>
-                    <Select name="state" inputId="state" defaultValue={state} onChange={setState} options={states} />
-
-                    <label htmlFor="zip-code">Zip Code</label>
-                    <input type="number" id="zip-code" value={ zipCode } onChange={ e => setZipCode(e.target.value) } />
-
-                </fieldset>
-
-                <label htmlFor="department">Department</label>
-                <Select name="department" inputId="department" defaultValue={department} onChange={setDepartment} options={departments} />
-
-                <button type="submit">Save</button>
-
-            </form>
-*/

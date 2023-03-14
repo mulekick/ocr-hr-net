@@ -107,7 +107,7 @@ div.employees-list-footer {
         font-size: $font_medium;
 
         // clickable icons
-        > i {
+        > svg {
             margin-left: 15px;
             cursor: pointer;
         }
@@ -207,18 +207,6 @@ form {
         width: calc(50% - 7.5px);
         padding: unset;
     }
-
-    button {
-        @include box($width: 100%);
-        @include span($margin: 12.5px 2px 0px 2px);
-
-        // styles overrides
-        border: 2px groove rgb(192, 192, 192);
-        cursor: pointer;
-        &:hover {
-            background-color: gainsboro;
-        }
-    }
 }
 
 /* ==== COMPONENT SPECIFIC STYLES ===== */
@@ -238,5 +226,25 @@ span.input-styled {
         @include box($height: 38px, $padding: 7.5px, $backcolor: hsl(0, 0%, 100%), $radius: 5px);
         @include span($margin: unset, $size: $font_small);
         border: 1px solid hsl(0, 0%, 80%);
+    }
+}
+
+// styles for buttons
+button {
+    @include box($width: 100%);
+    @include span($margin: 12.5px 2px 0px 2px);
+
+    // styles overrides
+    border: 2px groove rgb(192, 192, 192);
+    cursor: pointer;
+    &:hover {
+        background-color: gainsboro;
+    }
+}
+
+// set font for date select popup
+.select-date-font {
+    * {
+        font-family: "Quicksand", sans-serif;
     }
 }
