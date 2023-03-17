@@ -131,7 +131,7 @@ ul.employees-list {
         > span {
             @include flex($direction: row);
             @include span($margin: 2.5px, $size: $font_small);
-            @include box($width: 11.11%, $radius: unset);
+            @include box($radius: unset);
         }
 
         // column sizing ...

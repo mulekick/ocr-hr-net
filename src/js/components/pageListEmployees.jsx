@@ -7,6 +7,9 @@ import {selectEmployees} from "../app/employeesSlice.js";
 // subcomponents
 import DataTable from "./dataTable.jsx";
 
+// sample data
+import {employeesCols} from "../helpers/constants.js";
+
 const
     // init account page component
     PageListEmployees = props => {
@@ -14,11 +17,11 @@ const
             // extract props
             {nul} = props,
             // retrieve source data from state selector
-            {list} = useSelector(selectEmployees);
+            {employeeslist} = useSelector(selectEmployees);
 
         // return component
         return <main>
-            <DataTable data={list} />
+            <DataTable colDefs={employeesCols} data={employeeslist} />
         </main>;
     };
 

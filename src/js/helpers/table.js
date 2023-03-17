@@ -6,83 +6,53 @@ const
     ch = createColumnHelper(),
     // date formatter
     df = new Intl.DateTimeFormat(`en-US`, {year: `numeric`, month: `2-digit`, day: `2-digit`}),
-    // columns definitions
-    colDefs = [
-        ch.accessor(`firstName`, {
-            header: () => `First Name`
-        }),
-        ch.accessor(`lastName`, {
-            header: () => `Last Name`
-        }),
-        ch.accessor(`startDate`, {
-            header: () => `Start Date`,
-            cell: c => df.format(c.getValue())
-        }),
-        ch.accessor(`department`, {
-            header: () => `Department`,
-            cell: c => c.getValue().label,
-            sortingFn: `customSorting`
-        }),
-        ch.accessor(`birthDate`, {
-            header: () => `Date of Birth`,
-            cell: c => df.format(c.getValue())
-        }),
-        ch.accessor(`street`, {
-            header: () => `Street`
-        }),
-        ch.accessor(`city`, {
-            header: () => `City`
-        }),
-        ch.accessor(`state`, {
-            header: () => `State`,
-            cell: c => c.getValue().label,
-            sortingFn: `customSorting`
-        }),
-        ch.accessor(`zipCode`, {
-            header: () => `Zip Code`
-        })
-    ],
     // create custom sorting function
     customSorting = (rowA, rowB, columnId) => (rowA.getValue(columnId).label < rowB.getValue(columnId).label ? 1 : -1),
-    // create global filtering function
-    customFilter = (row, columnId, value, addMeta) => {
-        const
-            // extract row values
-            o = [ `firstName`, `lastName`, `birthDate`, `startDate`, `street`, `city`, `state`, `zipCode`, `department` ]
-                .reduce((r, x) => ({
-                    // copy cell value
-                    [x]: row.getValue(x),
-                    // spread accumulator into new object
-                    ...r
-                }), {});
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const v of Object.values(o)) {
-            // test according to value type (case insensitive) - exit on first match
-            switch (true) {
-            // date value
-            case v instanceof Date && v.toLocaleDateString().includes(value.toLowerCase()) :
-                return true;
-            // list element value
-            case Object.hasOwn(v, `label`) && Object.hasOwn(v, `value`) && v.label.toLowerCase().includes(value.toLowerCase()) :
-                return true;
-            // string value
-            case typeof v === `string` && v.toLowerCase().includes(value.toLowerCase()) :
-                return true;
-            // process next value
-            default :
-                // do not return
-            }
-        }
-        // filter out if nothing matches
-        return false;
-    },
-    // setup default table
-    createTable = (data, sorting, setSorting, globalFilter, setGlobalFilter) => ({
+    /*
+    -------------------------------------------------------------------
+    valid column definitions for the table are objects with the following signature :
+    myColumnDefinition = {
+        // string value that displays as a header for the column :
+        header: `My column name`,
+        // data type for values that the column will display, either :
+        // `string` ->  string primitives
+        // `date`   ->  Date objects
+        // `select` ->  select input values, ie. objects with the signature { value<string>, label<string>}
+        dataType: `string`,
+        // field name (actually object key) of the value that the column will display :
+        fieldName: `myColumnValue`
+    }
+    -------------------------------------------------------------------
+    */
+    // eslint-disable-next-line max-params
+    createTable = (colDefs, data, sorting, setSorting, globalFilter, setGlobalFilter) => ({
         // source data
         data,
         // columns definitions
-        columns: colDefs,
+        columns: colDefs.map(x => {
+            const
+                // extract values
+                {header, dataType, fieldName} = x;
+
+            // init accessor
+            let accessor = ch.accessor(fieldName, {
+                // colum header
+                header: () => header,
+                // column value
+                cell: c => (dataType === `date` ? df.format(c.getValue()) : dataType === `select` ? c.getValue().label : c.getValue())
+            });
+
+            // set custom sorting function for select fields
+            if (dataType === `select`) {
+                accessor = {
+                    ...accessor,
+                    sortingFn: `customSorting`
+                };
+            }
+
+            // return accessor
+            return accessor;
+        }),
         // models pipeline for rows display
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
@@ -93,9 +63,42 @@ const
         // sorting and filtering state update functions
         onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
-        // sorting and global filtering functions
+        // custom column sorting functions
         sortingFns: {customSorting},
-        globalFilterFn: customFilter,
+        // global filtering function
+        globalFilterFn: (row, columnId, value, addMeta) => {
+            const
+                // extract row values
+                o = colDefs
+                    .map(x => x.fieldName)
+                    .reduce((r, x) => ({
+                        // copy cell value
+                        [x]: row.getValue(x),
+                        // spread accumulator into new object
+                        ...r
+                    }), {});
+
+            // eslint-disable-next-line no-restricted-syntax
+            for (const v of Object.values(o)) {
+                // test according to value type (case insensitive) - exit on first match
+                switch (true) {
+                // date value
+                case v instanceof Date && v.toLocaleDateString().includes(value.toLowerCase()) :
+                    return true;
+                // list element value
+                case Object.hasOwn(v, `label`) && Object.hasOwn(v, `value`) && v.label.toLowerCase().includes(value.toLowerCase()) :
+                    return true;
+                // string value
+                case typeof v === `string` && v.toLowerCase().includes(value.toLowerCase()) :
+                    return true;
+                // process next value
+                default :
+                    // do not return
+                }
+            }
+            // filter out if nothing matches
+            return false;
+        },
         // disable console debug messages
         debugTable: false
     });

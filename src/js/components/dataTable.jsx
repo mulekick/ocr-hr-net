@@ -20,18 +20,20 @@ const
     DataTable = props => {
         const
             // extract props
-            {data} = props,
+            {colDefs, data} = props,
             // store sorting parameters in local component state
             [ sorting, setSorting ] = useState([]),
             // store filtering parameters in local component state
             [ globalFilter, setGlobalFilter ] = useState(``),
             // create data table (pass source data and local component state)
-            table = useReactTable(createTable(data, sorting, setSorting, globalFilter, setGlobalFilter)),
+            table = useReactTable(createTable(colDefs, data, sorting, setSorting, globalFilter, setGlobalFilter)),
             // headers sorting icons
             sortingIcons = {
                 asc: <FontAwesomeIcon icon={faArrowUpAZ} style={{color: `white`}} />,
                 desc: <FontAwesomeIcon icon={faArrowUpZA} style={{color: `white`}} />
-            };
+            },
+            // columm width
+            cw = 100 / Object.keys(data.at(0)).length;
 
         // return component
         return <>
@@ -49,7 +51,7 @@ const
                         .getHeaderGroups()
                         .map(headerGroup => <li key={headerGroup.id}>
                             {
-                                headerGroup.headers.map(header => <span key={header.id}>
+                                headerGroup.headers.map(header => <span style={{width: `${ cw }%`}} key={header.id}>
                                     {
                                         header.isPlaceholder ?
                                             null :
@@ -72,7 +74,7 @@ const
                             {
                                 row
                                     .getVisibleCells()
-                                    .map(cell => <span key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>)
+                                    .map(cell => <span style={{width: `${ cw }%`}} key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</span>)
                             }
                         </li>)
                 }
@@ -80,7 +82,7 @@ const
 
             <div className="employees-list-footer">
                 { /* pagination display */ }
-                <span className="basic-styled">Page <strong>{table.getState().pagination.pageIndex + 1} of {table.getPageCount()}</strong></span>
+                <span className="basic-styled">Page <strong>{table.getState().pagination.pageIndex + 1} of {Math.max(table.getPageCount(), 1)}</strong></span>
                 { /* pages navigation */ }
                 <span>
                     <FontAwesomeIcon icon={faFastBackward} style={{color: `black`, display: table.getCanPreviousPage() ? `block` : `none`}} onClick={() => table.setPageIndex(0)} />

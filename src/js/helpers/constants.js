@@ -261,19 +261,33 @@ const
             value: `WY`
         }
     ],
+    // pick a random value between 2 indices
     rnd = (lb, ub) => lb + Math.round(Math.random() * (ub - lb)),
-    randomEmployee = () => ({
+    // column data filler
+    createRandomEmployee = () => ({
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        birthDate: faker.date.birthdate(),
         startDate: faker.date.past(),
+        department: departments[rnd(0, departments.length - 1)],
+        birthDate: faker.date.birthdate(),
         street: faker.address.streetAddress(false),
         city: faker.address.cityName(),
         state: states[rnd(0, states.length - 1)],
-        zipCode: faker.address.zipCode(),
-        department: departments[rnd(0, departments.length - 1)]
+        zipCode: faker.address.zipCode()
     }),
-    // sample employee data
-    sample = Array.from({length: 50}).map(x => randomEmployee());
+    // columns definitions (title, data type, object key)
+    employeesCols = [
+        {header: `First Name`, dataType: `string`, fieldName: `firstName`},
+        {header: `Last Name`, dataType: `string`, fieldName: `lastName`},
+        {header: `Start Date`, dataType: `date`, fieldName: `startDate`},
+        {header: `Department`, dataType: `select`, fieldName: `department`},
+        {header: `Date of Birth`, dataType: `date`, fieldName: `birthDate`},
+        {header: `Street`, dataType: `string`, fieldName: `street`},
+        {header: `City`, dataType: `string`, fieldName: `city`},
+        {header: `State`, dataType: `select`, fieldName: `state`},
+        {header: `Zip Code`, dataType: `string`, fieldName: `zipCode`}
+    ],
+    // generate sample employee data
+    employeesSampleData = Array.from({length: 50}).map(x => createRandomEmployee());
 
-export {sample, departments, states, randomEmployee};
+export {departments, states, employeesCols, employeesSampleData};
