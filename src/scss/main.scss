@@ -1,11 +1,11 @@
 @charset "utf-8";
 
 // import variables and mixins from the plugin
-@import "../../node_modules/@mulekick/ocr-data-table-plugin/dist/scss/variables.scss";
-@import "../../node_modules/@mulekick/ocr-data-table-plugin/dist/scss/mixins.scss";
+@import "@mulekick/ocr-data-table-plugin/dist/scss/variables.scss";
+@import "@mulekick/ocr-data-table-plugin/dist/scss/mixins.scss";
 
 // import datepicker styles
-@import "../../node_modules/react-datepicker/src/stylesheets/datepicker.scss";
+@import "react-datepicker/src/stylesheets/datepicker.scss";
 
 body {
     width: 1240px;
