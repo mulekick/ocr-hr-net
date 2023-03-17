@@ -7,8 +7,7 @@ import {departments, states} from "../helpers/constants.js";
 import {add} from "../app/employeesSlice.js";
 
 // subcomponents
-import StyledInput from "./styledInput.jsx";
-import StyledSelect from "./styledSelect.jsx";
+import {StyledInput, StyledSelect} from "@mulekick/ocr-data-table-plugin";
 import StyledDate from "./styledDate.jsx";
 import StyledModal from "./styledModal.jsx";
 

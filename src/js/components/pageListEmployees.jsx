@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import {selectEmployees} from "../app/employeesSlice.js";
 
 // subcomponents
-import DataTable from "./dataTable.jsx";
+import {DataTable} from "@mulekick/ocr-data-table-plugin";
 
 // sample data
 import {employeesCols} from "../helpers/constants.js";

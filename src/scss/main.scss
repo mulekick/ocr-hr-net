@@ -1,6 +1,8 @@
 @charset "utf-8";
 
-@import "mixins";
+// import variables and mixins from the plugin
+@import "../../node_modules/@mulekick/ocr-data-table-plugin/dist/scss/variables.scss";
+@import "../../node_modules/@mulekick/ocr-data-table-plugin/dist/scss/mixins.scss";
 
 // import datepicker styles
 @import "../../node_modules/react-datepicker/src/stylesheets/datepicker.scss";
@@ -82,105 +84,9 @@ footer {
 /* ======= PAGE SPECIFIC STYLES ======= */
 
 // employees list
-
-div.employees-list-header, div.employees-list-footer {
-
-    // content layout management
-    @include flex($direction: row, $align: center, $justify: space-between);
-    @include box($width: inherit, $padding: 2.5px, $backcolor: inherit);
-
-}
-
-div.employees-list-footer {
-    > span:nth-of-type(1) {
-        // style overrides
-        padding-left: 0px;
-        font-size: $font_medium;
-    }
-
-    > span:nth-of-type(2) {
-        // style overrides
-        @include flex($direction: row, $justify: flex-end);
-        padding: 7.5px;
-        padding-right: 0px;
-        width: 10%;
-        font-size: $font_medium;
-
-        // clickable icons
-        > svg {
-            margin-left: 15px;
-            cursor: pointer;
-        }
-    }
-}
-
-ul.employees-list {
-    // content layout management
-    @include flex($align: center);
-    @include box($width: inherit, $padding: 0px);
-
-    // style overrides
-    list-style-type: none;
-
-    > li {
-        // content layout management
-        @include flex($direction: row, $align: center, $justify: space-around);
-        @include box($width: inherit, $padding: 0px);
-
-        // columns headers
-        > span {
-            @include flex($direction: row);
-            @include span($margin: 2.5px, $size: $font_small);
-            @include box($radius: unset);
-        }
-
-        // column sizing ...
-        /*
-        > span:nth-child(6) { width: 12.5%; }
-        > span:nth-child(9) { width: 7.5%; }
-        */
-    }
-
-    // table headers
-    > li:first-child {
-
-        // columns headers
-        > span {
-            // style overrides
-            justify-content: space-between;
-            height: 50px;
-            padding: 7.5px;
-            background-color: black;
-            color: white;
-            font-weight: bold;
-            // clickable header
-            > div:nth-child(1) {
-                cursor: pointer;
-            }
-        }
-
-    }
-
-    // table rows
-    > li:not(:first-child) {
-
-        // cells values
-        > span {
-            // style overrides            
-            justify-content: flex-start;
-            height: 25px;
-            padding: unset;
-            color: black;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-    }
-}
+// (moved to plugin)
 
 // new employee form
-
 form {
     @include flex($direction: row, $align: flex-start, $justify: space-between);
     @include box($width: 100%, $height: 100%, $padding: unset, $backcolor: inherit);
@@ -212,22 +118,8 @@ form {
 /* ==== COMPONENT SPECIFIC STYLES ===== */
 
 // styles for text-only spans
-span.basic-styled {
-    @include box($height: 38px, $padding: 7.5px, $backcolor: inherit);
-    @include span($margin: unset, $size: $font_small);
-}
-
 // styles for text inputs, date inputs and selects
-span.input-styled {
-    @include box($padding: unset);
-    @include span($margin: unset, $size: $font_small);
-
-    > input {
-        @include box($height: 38px, $padding: 7.5px, $backcolor: hsl(0, 0%, 100%), $radius: 5px);
-        @include span($margin: unset, $size: $font_small);
-        border: 1px solid hsl(0, 0%, 80%);
-    }
-}
+// (moved to plugin)
 
 // styles for buttons
 button {
