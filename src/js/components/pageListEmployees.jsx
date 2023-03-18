@@ -21,7 +21,13 @@ const
 
         // return component
         return <main>
-            <DataTable colDefs={employeesCols} data={employeeslist} />
+            {
+                // conditional rendering : display table if column definitions and rows data exist
+                // (it is assessed that rows data match columns definitions ...)
+                employeesCols && employeesCols.length && employeeslist && employeeslist.length ?
+                    <DataTable colDefs={employeesCols} data={employeeslist} /> :
+                    <span className="basic-styled">No employee data available.</span>
+            }
         </main>;
     };
 

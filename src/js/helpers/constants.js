@@ -1,6 +1,18 @@
-import {faker} from "@faker-js/faker";
+// import {faker} from "@faker-js/faker";
 
 const
+    // columns definitions (title, data type, object key)
+    employeesCols = [
+        {header: `First Name`, dataType: `string`, fieldName: `firstName`},
+        {header: `Last Name`, dataType: `string`, fieldName: `lastName`},
+        {header: `Start Date`, dataType: `date`, fieldName: `startDate`},
+        {header: `Department`, dataType: `select`, fieldName: `department`},
+        {header: `Date of Birth`, dataType: `date`, fieldName: `birthDate`},
+        {header: `Street`, dataType: `string`, fieldName: `street`},
+        {header: `City`, dataType: `string`, fieldName: `city`},
+        {header: `State`, dataType: `select`, fieldName: `state`},
+        {header: `Zip Code`, dataType: `string`, fieldName: `zipCode`}
+    ],
     departments = [
         {
             label: `Sales`,
@@ -261,6 +273,7 @@ const
             value: `WY`
         }
     ],
+    /*
     // pick a random value between 2 indices
     rnd = (lb, ub) => lb + Math.round(Math.random() * (ub - lb)),
     // column data filler
@@ -275,19 +288,9 @@ const
         state: states[rnd(0, states.length - 1)],
         zipCode: faker.address.zipCode()
     }),
-    // columns definitions (title, data type, object key)
-    employeesCols = [
-        {header: `First Name`, dataType: `string`, fieldName: `firstName`},
-        {header: `Last Name`, dataType: `string`, fieldName: `lastName`},
-        {header: `Start Date`, dataType: `date`, fieldName: `startDate`},
-        {header: `Department`, dataType: `select`, fieldName: `department`},
-        {header: `Date of Birth`, dataType: `date`, fieldName: `birthDate`},
-        {header: `Street`, dataType: `string`, fieldName: `street`},
-        {header: `City`, dataType: `string`, fieldName: `city`},
-        {header: `State`, dataType: `select`, fieldName: `state`},
-        {header: `Zip Code`, dataType: `string`, fieldName: `zipCode`}
-    ],
     // generate sample employee data
     employeesSampleData = Array.from({length: 50}).map(x => createRandomEmployee());
+    */
+    employeesSampleData = [];
 
 export {departments, states, employeesCols, employeesSampleData};
