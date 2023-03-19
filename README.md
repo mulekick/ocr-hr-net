@@ -9,7 +9,7 @@ npm uninstall --save @testing-library/jest-dom @testing-library/react @testing-l
 ```
 3. install project dev dependencies
 ```bash
-npm install --save-dev @mulekick/eslint-config-muleslint sass serve
+npm install --save-dev @mulekick/eslint-config-muleslint sass serve gh-pages
 ```
 4. install project dependencies
 ```bash

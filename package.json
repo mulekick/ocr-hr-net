@@ -18,6 +18,7 @@
     },
     "devDependencies": {
         "@mulekick/eslint-config-muleslint": "^1.0.2",
+        "gh-pages": "^5.0.0",
         "sass": "^1.59.3",
         "serve": "^14.2.0"
     },
@@ -25,6 +26,8 @@
         "start": "react-scripts start",
         "build": "GENERATE_SOURCEMAP=false react-scripts build",
         "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages --dist build --branch static --message \"rebuild\"",
         "live": "docker container run --rm -d --mount type=bind,source=$(realpath build),target=/content,ro=true -p 8080:80 mulekick/serve-static:latest > /tmp/static-container-id",
         "die": "docker container stop $(cat /tmp/static-container-id) && rm /tmp/static-container-id"
     },
@@ -35,5 +38,6 @@
     "author": "mulekick <moolekick@gmail.com> (https://github.com/mulekick)",
     "license": "MIT",
     "repository": {},
-    "bugs": {}
+    "bugs": {},
+    "homepage": "https://mulekick.github.io/ocr-hr-net/"
 }

@@ -1,5 +1,5 @@
 // import modules
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createHashRouter, RouterProvider} from "react-router-dom";
 
 // import components
 import Layout from "./layout.jsx";
@@ -8,7 +8,9 @@ import PageListEmployees from "./pageListEmployees.jsx";
 
 const
     // init router
-    router = createBrowserRouter([
+     // init router (use a hash router for github pages support)
+    // components states are not persisted on route change ...
+    router = createHashRouter([
         {
             path: `/`,
             // init / route
