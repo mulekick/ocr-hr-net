@@ -6,7 +6,7 @@
     "type": "module",
     "dependencies": {
         "@faker-js/faker": "^7.6.0",
-        "@mulekick/ocr-data-table-plugin": "^0.2.9",
+        "@mulekick/ocr-data-table-plugin": "^0.3.0",
         "@reduxjs/toolkit": "^1.9.3",
         "react": "^18.2.0",
         "react-datepicker": "^4.10.0",

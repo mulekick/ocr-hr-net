@@ -1,3 +1,5 @@
+Note : this app uses a homemade [data table react plugin](https://www.npmjs.com/package/@mulekick/ocr-data-table-plugin).
+
 # Create React App customizations :
 1. use the redux template for create-react-app
 ```bash
