@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.3d8fb7b7.css",
-    "main.js": "/static/js/main.979c590e.js",
-    "index.html": "/index.html"
+    "main.css": "/ocr-hr-net/static/css/main.3d8fb7b7.css",
+    "main.js": "/ocr-hr-net/static/js/main.979c590e.js",
+    "index.html": "/ocr-hr-net/index.html"
   },
   "entrypoints": [
     "static/css/main.3d8fb7b7.css",
