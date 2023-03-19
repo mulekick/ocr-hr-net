@@ -9,19 +9,21 @@ npm uninstall --save @testing-library/jest-dom @testing-library/react @testing-l
 ```
 3. install project dev dependencies
 ```bash
-npm install --save-dev @mulekick/eslint-config-muleslint
+npm install --save-dev @mulekick/eslint-config-muleslint sass serve
 ```
 4. install project dependencies
 ```bash
-npm install --save react-router-dom
+npm install --save @mulekick/ocr-data-table-plugin react-datepicker react-modal react-router-dom
 ```
 5. update package.json :
    - add custom package.json scripts
    - remove ```eslintConfig``` key
+   - remove ```browserslist``` key
    - switch to ESM modules use :```"type": "module"```
    - add informational entries
 6. add custom ```.eslintrc.json``` file
-7. file system cleanup
+7. add custom ```.browserslistrc``` file
+8. file system cleanup
 ```bash
 rm src/setupTests.js src/reportWebVitals.js src/App.test.js src/features/counter/counterSlice.spec.js public/logo* public/manifest.json public/robots.txt
 ```

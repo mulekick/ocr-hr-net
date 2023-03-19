@@ -5,7 +5,8 @@
     "private": true,
     "type": "module",
     "dependencies": {
-        "@mulekick/ocr-data-table-plugin": "^0.2.8",
+        "@faker-js/faker": "^7.6.0",
+        "@mulekick/ocr-data-table-plugin": "^0.2.9",
         "@reduxjs/toolkit": "^1.9.3",
         "react": "^18.2.0",
         "react-datepicker": "^4.10.0",
@@ -13,12 +14,12 @@
         "react-modal": "^3.16.1",
         "react-redux": "^8.0.5",
         "react-router-dom": "^6.9.0",
-        "react-scripts": "5.0.1",
-        "sass": "^1.59.3",
-        "serve": "^14.2.0"
+        "react-scripts": "5.0.1"
     },
     "devDependencies": {
-        "@mulekick/eslint-config-muleslint": "^1.0.2"
+        "@mulekick/eslint-config-muleslint": "^1.0.2",
+        "sass": "^1.59.3",
+        "serve": "^14.2.0"
     },
     "scripts": {
         "start": "react-scripts start",

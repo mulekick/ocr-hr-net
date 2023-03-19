@@ -1,4 +1,4 @@
-// import {faker} from "@faker-js/faker";
+import {faker} from "@faker-js/faker";
 
 const
     // columns definitions (title, data type, object key)
@@ -273,7 +273,6 @@ const
             value: `WY`
         }
     ],
-    /*
     // pick a random value between 2 indices
     rnd = (lb, ub) => lb + Math.round(Math.random() * (ub - lb)),
     // column data filler
@@ -290,7 +289,5 @@ const
     }),
     // generate sample employee data
     employeesSampleData = Array.from({length: 50}).map(x => createRandomEmployee());
-    */
-    employeesSampleData = [];
 
 export {departments, states, employeesCols, employeesSampleData};
