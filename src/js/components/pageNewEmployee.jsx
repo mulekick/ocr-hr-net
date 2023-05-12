@@ -29,40 +29,50 @@ const
             [ state, setState ] = useState(null),
             [ zipCode, setZipCode ] = useState(``),
             [ department, setDepartment ] = useState(null),
+            // store modal error indication in component local state
+            [ modalError, setModalError ] = useState(true),
             // store modal state in component local state
             [ modalState, setModalState ] = useState(false),
+
             // form submission handler
             createEmployee = ev => {
                 ev.preventDefault();
-                // dispatch add action to the store
-                dispatch(add({
-                    // string
-                    firstName,
-                    // string
-                    lastName,
-                    // date
-                    birthDate,
-                    // date
-                    startDate,
-                    // string
-                    street,
-                    // string
-                    city,
-                    // object
-                    state,
-                    // number
-                    zipCode,
-                    // object
-                    department
-                }));
-                // open confirmation modal
+                // it seems accurate to perform input validation there so as to avoid
+                // updating the state with action payloads containing invalid data
+                // test that all variables initialized with null or empty string now contain valid inputs
+                if ([ firstName, lastName, street, city, zipCode ].some(x => x === ``) === false && [ birthDate, startDate, state, department ].some(x => x === null) === false) {
+                    // set the input as valid for modal display
+                    setModalError(false);
+                    // dispatch add action to the store
+                    dispatch(add({
+                        // string
+                        firstName,
+                        // string
+                        lastName,
+                        // date
+                        birthDate,
+                        // date
+                        startDate,
+                        // string
+                        street,
+                        // string
+                        city,
+                        // object
+                        state,
+                        // number
+                        zipCode,
+                        // object
+                        department
+                    }));
+                }
+                // open modal
                 setModalState(true);
             };
 
         // return component
         return <main>
-            { /* state is lifted from the modal component to the local compnent ... */}
-            <StyledModal modalState={modalState} onModalStateChange={setModalState} />
+            { /* state is lifted from the modal component to the local component ... */}
+            <StyledModal modalError={modalError} modalState={modalState} onModalStateChange={setModalState} />
             <form onSubmit={ createEmployee }>
                 {/* general fields */}
                 <div className="form-fields">
